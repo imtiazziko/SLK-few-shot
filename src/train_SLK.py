@@ -19,7 +19,7 @@ from torch.optim.lr_scheduler import MultiStepLR, StepLR, CosineAnnealingLR
 import tqdm
 from scipy.stats import mode
 from utils import configuration_SLK as configuration
-from lshot_update import bound_update
+from bound_update import bound_update
 from SLK import SLK
 from numpy import linalg as LA
 import datasets
@@ -319,7 +319,7 @@ def setup_logger(filepath):
     file_handle_name = "file"
     if file_handle_name in [h.name for h in logger.handlers]:
         return
-    if os.path.dirname(filepath) is not '':
+    if os.path.dirname(filepath) != '':
         if not os.path.isdir(os.path.dirname(filepath)):
             os.makedirs(os.path.dirname(filepath))
     file_handle = logging.FileHandler(filename=filepath, mode="a")
@@ -456,7 +456,7 @@ def extract_feature_tune(train_loader, val_loader, model, tag='best'):
         return all_info
 
 def get_dataloader(split, aug=False, shuffle=True, out_name=False, sample=None):
-    # breakpoint()
+
     # sample: iter, way, shot, query
     if aug:
         transform = datasets.with_augment(84, disable_random_resize=args.disable_random_resize, jitter=args.jitter)
@@ -545,42 +545,9 @@ def meta_evaluate_tune(data, train_mean, shot):
     cl2n_mean, cl2n_conf = compute_confidence_interval(cl2n_list)
     return cl2n_mean, cl2n_conf
 
-# def tune_lambda(train_loader, model, log):
-#     val_loader = get_dataloader('val', aug=False, shuffle=False, out_name=False)
-#     load_checkpoint(model, 'best')
-#     # breakpoint()
-#     out_mean, out_dict = extract_feature_tune(train_loader, val_loader, model, tag='best')
-#     best_acc_1 = -1
-#     best_lmd_1 = 0.1
-#     best_acc_5 = -1
-#     best_lmd_5 = 0.1
-#     for lmd in [0.1, 0.3, 0.5, 0.7, 0.8, 1.0, 1.2, 1.5]:
-#         args.lmd = lmd
-#         accuracy_info_shot1 = meta_evaluate_tune(out_dict, out_mean, 1)
-#         accuracy_info_shot5 = meta_evaluate_tune(out_dict, out_mean, 5)
-#         acc_1 = accuracy_info_shot1[0]
-#         acc_5 = accuracy_info_shot5[0]
-#         if acc_1>best_acc_1:
-#             best_acc_1= acc_1
-#             best_lmd_1 = args.lmd
-#         if acc_5>best_acc_5:
-#             best_acc_5= acc_5
-#             best_lmd_5 = args.lmd
-#
-#         print(
-#             'validation lmd={:0.2f}: Best\nfeature\tCL2N\n{}\t{:.4f}({:.4f})\n{}\t{:.4f}({:.4f}))'.format(args.lmd,
-#             'GVP 1Shot', *accuracy_info_shot1, 'GVP_5Shot', *accuracy_info_shot5))
-#         log.info(
-#             'validation lmd={:0.2f}: Best\nfeature\tCL2N\n{}\t{:.4f}({:.4f})\n{}\t{:.4f}({:.4f}))'.format(args.lmd,
-#             'GVP 1Shot', *accuracy_info_shot1, 'GVP_5Shot', *accuracy_info_shot5))
-#         print('Best lambda on validation:\n{:0.2f} with 1 shot acc {:.4f}\n{:0.2f} with 5 shot acc {:.4f}'.format(best_lmd_1, best_acc_1,best_lmd_5, best_acc_5))
-#         log.info('Best lambda on validation:\n{:0.2f} with 1 shot acc {:.4f}\n{:0.2f} with 5 shot acc {:.4f}'.format(best_lmd_1, best_acc_1,best_lmd_5, best_acc_5))
-#     return best_lmd_1, best_lmd_5
-
 def tune_lambda(train_loader, model, log):
     val_loader = get_dataloader('val', aug=False, shuffle=False, out_name=False)
     load_checkpoint(model, 'best')
-    # breakpoint()
     out_mean, out_dict = extract_feature_tune(train_loader, val_loader, model, tag='best')
 
     acc_val_list_1 = []
@@ -644,11 +611,11 @@ def metric_class_type(gallery, query, support_label, test_label, shot, train_mea
         shot_size = [shot]*args.meta_val_way
         eta = X_support.mean(0) - query.mean(0) # domain shift
         query = query + eta[np.newaxis,:]
-        X = np.concatenate((X_support, query),axis=0)
+        X = np.concatenate((X_support, query), axis=0)
         knn = args.knn
         W = create_affinity(X, knn)
         lmd = args.lmd
-        # breakpoint()
+
         if args.mode=='ncut':
             from sklearn.cluster import SpectralClustering
             # clustering = SpectralClustering(n_clusters=args.meta_val_way,
@@ -735,6 +702,7 @@ def sample_case(ld_dict, shot):
 
 
 def do_extract_and_evaluate(model, log):
+
     train_loader = get_dataloader('train', aug=False, shuffle=False, out_name=False)
     if args.tune_lmd :
         print('Tuning Lambda')

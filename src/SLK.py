@@ -50,7 +50,7 @@ def MS(X,s,tmp,c0,tol,maxit):
     """
     Mean-shift iteration until convergence
     """
-    # print 'inside meanshift iterations.'
+    # print ('inside meanshift iterations.')
     for i in range(maxit):
         Y = ecdist(c0,X[tmp,:],squared=True)
         W = np.exp((-Y)/(2 * s ** 2))
@@ -74,7 +74,7 @@ def MS_par(slices):
         tmp = tmp.squeeze()
     else:
         tmp = tmp[0]
-    C_out[[k],:] = MS(X,s,tmp,C_s[[k],:],1e-5,int(1e3))
+    C_out[[k],:] = MS(X,s,tmp,C_s[[k],:],1e-5, int(1e3))
 
 def KM_par(slices):
 
@@ -261,11 +261,7 @@ def SLK(X, W, C, shot_size, lmd, method = 'BO', lap_bound = True, sigma = None):
             # print ('Inside mean update')
             tmp_list = [np.where(l==k)[0] for k in range(K)]
 
-            if lap_bound==True and i>0:
-                C_list = [kmeans_update_soft(Z[:,k]) for k in range(K)]
-            else:
-                C_list = pool.map(kmeans_update,tmp_list)
-
+            C_list = pool.map(kmeans_update, tmp_list)
             C = np.asarray(np.vstack(C_list))
             a_p = ecdist(X,C,squared=True)
 
@@ -280,6 +276,8 @@ def SLK(X, W, C, shot_size, lmd, method = 'BO', lap_bound = True, sigma = None):
         if lap_bound == True or lmd!=0.0:
             bound_iterations = 600
             Y = bound.normalize(-a_p)
+            # Y[:len(support_labels), :] = 0
+            # Y[np.arange(len(support_labels)), support_labels] = 1
             batch = True if X.shape[0]>100000 else False
             if method == 'BO':
                 l,C,Z= bound.bound_update(a_p, Y, X, W, lmd, bound_iterations, batch)

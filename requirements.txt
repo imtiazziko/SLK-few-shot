@@ -1,0 +1,8 @@
+configargparse
+torch==1.2.0
+torchvision==0.4
+scikit-learn==0.22
+pyflann3
+tqdm
+matplotlib==3.0
+numexpr

@@ -1,5 +1,5 @@
 # SLK-few-shot
-Clustering for Few-shot Learning
+Clustering for Transductive Few-shot Learning
 
 This repository contains the code for **Transductive Few-Shot Learning: Clustering is All You Need?** paper. If you use this code please cite the following paper:
 [**Transductive Few-Shot Learning: Clustering is All You Need?**]()  

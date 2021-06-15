@@ -57,15 +57,15 @@ We get the following results in different few-shot benchmarks:
 
 | Methods  | 1-shot | 5-shot |
 |--------- |--------|--------|
-| ProtoNet (Snell et al., 2017) | 62.60   | 79.97  |
-| CC+rot (Gidaris et al., 2019)  | 62.93  | 79.87  |
-| MatchingNet (Vinyals et al., 2016)     | 64.03  | 76.32  |
-| FEAT (Ye et al., 2020)     | 65.10  | 81.11  |
-| Transductive tuning (Dhillon et al., 2020)     | 65.73 | 78.40 |
-| SimpleShot (Wang et al., 2019)     | 65.87 | 82.09 |
-| SIB (Hu et al., 2020)     | 70.0 | 79.2 |
-| BD-CSPN (Liu et al., 2019)     | 70.31 | 81.89 |
-| LaplacianShot (Ziko et al., 2020)     | 73.44 | 83.93|
+| ProtoNet (Snell et al., NeurIPS 2017) | 62.60   | 79.97  |
+| CC+rot (Gidaris et al., ICCV 2019)  | 62.93  | 79.87  |
+| MatchingNet (Vinyals et al., NeurIPS 2016)     | 64.03  | 76.32  |
+| FEAT (Ye et al., CVPR 2020)     | 65.10  | 81.11  |
+| Transductive fine-tuning (Dhillon et al., ICLR 2020)     | 65.73 | 78.40 |
+| SimpleShot (Wang et al., ArXiv 2019)     | 65.87 | 82.09 |
+| SIB (Hu et al., ICLR 2020)     | 70.0 | 79.2 |
+| BD-CSPN (Liu et al., ECCV 2020)     | 70.31 | 81.89 |
+| LaplacianShot (Ziko et al., ICML 2020)     | 73.44 | 83.93|
 | K-means      | 73.80 | **84.62**|
 | K-modes    | 74.78 | 84.45|
 | SLK-Means     | 74.75 | 84.61|
@@ -77,12 +77,12 @@ With _WRN_ network:
 
 | Methods  | 1-shot | 5-shot |
 |--------- |--------|--------|
-| CC+rot (Gidaris et al., 2019)  | 70.53  | 84.98  |
-| FEAT (Ye et al., 2020)     | 70.41  | 84.38  |
-| Transductive tuning (Dhillon et al., 2020)     | 73.34 | 85.50 |
-| SimpleShot (Wang et al., 2019)     | 70.90 | 85.76 |
-| BD-CSPN (Liu et al., 2019)     | 78.74 | 86.92 |
-| LaplacianShot (Ziko et al., 2020)     | 78.80 | **87.72** |
+| CC+rot (Gidaris et al., ICCV 2019)  | 70.53  | 84.98  |
+| FEAT (Ye et al., CVPR 2020)     | 70.41  | 84.38  |
+| Transductive fine-tuning (Dhillon et al., ICLR 2020)     | 73.34 | 85.50 |
+| SimpleShot (Wang et al., ArXiv 2019)     | 70.90 | 85.76 |
+| BD-CSPN (Liu et al., ECCV 2020)     | 78.74 | 86.92 |
+| LaplacianShot (Ziko et al., ICML 2020)     | 78.80 | **87.72** |
 | K-means      | 79.78 | 87.23|
 | K-modes    | 80.67 | 87.23|
 | SLK-Means     | 80.55 | 87.57|
@@ -94,13 +94,13 @@ With _ResNet-18_ network
 
 | Methods  | 1-shot | 5-shot |
 |--------- |--------|--------|
-| MatchingNet (Vinyals et al., 2016)     | 73.49  | 84.45  |
-| MAML (Finn et al., 2017)     | 68.42 | 83.47 |
-| ProtoNet (Snell et al., 2017)     | 72.99 | 86.64 |
-| RelationNet (Sung et al., 2018)     | 68.58 | 84.05 |
-| Chen (Chen et al., 2019)    | 67.02 | 83.58  |
-| SimpleShot (Wang et al., 2019)    | 70.28  | 86.37  |
-| LaplacianShot (Ziko et al., 2020)     | 79.93 | 88.59 |
+| MatchingNet (Vinyals et al., NeurIPS 2016)     | 73.49  | 84.45  |
+| MAML (Finn et al., ICML 2017)     | 68.42 | 83.47 |
+| ProtoNet (Snell et al., NeurIPS 2017)     | 72.99 | 86.64 |
+| RelationNet (Sung et al., CVPR 2018)     | 68.58 | 84.05 |
+| Chen (Chen et al., ICLR 2019)    | 67.02 | 83.58  |
+| SimpleShot (Wang et al., ArXiv 2019)    | 70.28  | 86.37  |
+| LaplacianShot (Ziko et al., ICML 2020)     | 79.93 | 88.59 |
 | K-means      | 80.30 | 88.51|
 | K-modes    | 81.73 | 88.58|
 | SLK-Means     | 81.40 | **88.61**|

@@ -134,13 +134,13 @@ def bound_update(unary, Y, X, kernel, bound_lambda, bound_iteration=20, batch=Fa
     for i in range(bound_iteration):
         additive = -unary
         mul_kernel = kernel.dot(Y)
-        Y = -bound_lambda * mul_kernel
+        Y = - bound_lambda * mul_kernel
         additive = additive - Y
         Y = normalize(additive)
         E = entropy_energy(Y, unary, kernel, bound_lambda, batch)
         E_list.append(E)
         # print('entropy_energy is ' +repr(E) + ' at iteration ',i)
-        if (i > 1 and (abs(E - oldE) <= 1e-6 * abs(oldE))):
+        if (i > 1 and (abs(E - oldE) <= 1e-7 * abs(oldE))):
             # print('Converged')
             break
 
@@ -152,6 +152,6 @@ def bound_update(unary, Y, X, kernel, bound_lambda, bound_iteration=20, batch=Fa
     #   plot_convergence(filename,E_list)
 
     l = np.argmax(Y, axis=1)
-    ind = np.argmax(Y,axis=0)
+    ind = np.argmax(Y, axis=0)
     C= X[ind,:]
     return l,C,Y

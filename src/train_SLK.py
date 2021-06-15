@@ -30,7 +30,6 @@ from sklearn.neighbors import NearestNeighbors
 import copy
 best_prec1 = -1
 
-
 def main():
     global args, best_prec1
     args = configuration.parser_args()
@@ -553,7 +552,7 @@ def tune_lambda(train_loader, model, log):
     acc_val_list_1 = []
     acc_val_list_5 = []
 
-    lmd_list = [0.05, 0.1, 0.3, 0.5, 0.7, 0.8, 1.0]
+    lmd_list = [0.05, 0.1, 0.3, 0.5, 0.7, 0.8, 0.9, 1.0]
     for lmd in lmd_list:
         args.lmd = lmd
         accuracy_info_shot1 = meta_evaluate_tune(out_dict, out_mean, 1)
@@ -607,6 +606,7 @@ def metric_class_type(gallery, query, support_label, test_label, shot, train_mea
 
     support_label = support_label[::shot]
     test_label = np.array(test_label)
+
     if  args.slk: #SLK
         shot_size = [shot]*args.meta_val_way
         eta = X_support.mean(0) - query.mean(0) # domain shift
@@ -618,20 +618,22 @@ def metric_class_type(gallery, query, support_label, test_label, shot, train_mea
 
         if args.mode=='ncut':
             from sklearn.cluster import SpectralClustering
-            # clustering = SpectralClustering(n_clusters=args.meta_val_way,
+            clustering = SpectralClustering(n_clusters=args.meta_val_way,
+            assign_labels="discretize", random_state=0).fit(X)
+            l = clustering.labels_
+            # W = create_affinity(X, 5)
+            # W= np.asarray(W.todense()) + 1e-6
+            # W = (W + W.transpose()) /2.0
+            # l = SpectralClustering(n_clusters=args.meta_val_way,affinity='precomputed',
             # assign_labels="discretize", random_state=0).fit_predict(W)
-            # l = clustering.labels_
-            W = create_affinity(X, 5)
-            W= np.asarray(W.todense()) + 1e-6
-            W = (W + W.transpose()) /2.0
-            l = SpectralClustering(n_clusters=args.meta_val_way,affinity='precomputed',
-            assign_labels="discretize", random_state=0).fit_predict(W)
             l = l[X_support.shape[0]:]
         else:
             _,l = SLK(X, W, gallery, shot_size, lmd, method = args.mode, lap_bound = args.lap_bound)
 
         out = np.take(support_label, l)
-        acc, _ = get_accuracy(test_label, out)
+        # acc, _ = get_accuracy(test_label, out)
+        out = out.astype(int)
+        acc = (out == test_label).mean()
     else:
         idx = np.argpartition(distance, args.num_NN, axis=0)[:args.num_NN]
         nearest_samples = np.take(support_label, idx)

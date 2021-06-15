@@ -3,7 +3,7 @@ Clustering for Few-shot Learning
 
 This repository contains the code for **Clustering for few-shot learning** paper. If you use this code please cite the following paper:
 [**Clustering for few-shot learning**]()  
-Imtiaz Masud Ziko, Jose Dolz, Eric Granger and Ismail Ben Ayed  
+Imtiaz Masud Ziko, Malik Boudiaf, Jose Dolz, Eric Granger and Ismail Ben Ayed  
 
 ## Introduction
 We Adapt clustering algorithm for few-shot learning task. The clustering part works on the initially learned feature extractor on base class data.
@@ -41,12 +41,59 @@ The scripts to test SLK-shot:
 ```angular2
 sh run_SLK.sh
 ```
-You can change the commented options accordingly for each dataset.
+## Results
+We get the following results in different few-shot benchmarks:
 
-Some of our results of LaplacianShot with WRN on mini/tiered imageNet/CUB:
+### On **mini-ImageNet**
+ With _WRN_ network:
 
-| Dataset | Network   | 1-shot | 5-shot |
-|---------|-----------|--------|--------|
-| Mini    | WRN       | 74.86  | 84.13  |
-| Tiered  | WRN       | 80.18  | 87.56  |
-| CUB     | Resbet-18 | 80.96  | 88.38  |
+| Methods  | 1-shot | 5-shot |
+|--------- |--------|--------|
+| ProtoNet (Snell et al., 2017) | 62.60   | 79.97  |
+| CC+rot (Gidaris et al., 2019)  | 62.93  | 79.87  |
+| MatchingNet (Vinyals et al., 2016)     | 64.03  | 76.32  |
+| FEAT (Ye et al., 2020)     | 65.10  | 81.11  |
+| Transductive tuning (Dhillon et al., 2020)     | 65.73 | 78.40 |
+| SimpleShot (Wang et al., 2019)     | 65.87 | 82.09 |
+| SIB (Hu et al., 2020)     | 70.0 | 79.2 |
+| BD-CSPN (Liu et al., 2019)     | 70.31 | 81.89 |
+| LaplacianShot (Ziko et al., 2020)     | 73.44 | 83.93|
+| K-means      | 73.80 | **84.62**|
+| K-modes    | 74.78 | 84.45|
+| SLK-Means     | 74.75 | 84.61|
+| SLK-MS      | **75.17** | 84.28|
+
+### On **tiered-ImageNet**
+
+With _WRN_ network:
+
+| Methods  | 1-shot | 5-shot |
+|--------- |--------|--------|
+| CC+rot (Gidaris et al., 2019)  | 70.53  | 84.98  |
+| FEAT (Ye et al., 2020)     | 70.41  | 84.38  |
+| Transductive tuning (Dhillon et al., 2020)     | 73.34 | 85.50 |
+| SimpleShot (Wang et al., 2019)     | 70.90 | 85.76 |
+| BD-CSPN (Liu et al., 2019)     | 78.74 | 86.92 |
+| LaplacianShot (Ziko et al., 2020)     | 78.80 | **87.72** |
+| K-means      | 79.78 | 87.23|
+| K-modes    | 80.67 | 87.23|
+| SLK-Means     | 80.55 | 87.57|
+| SLK-MS      | **81.13** | 87.69|
+
+### On **CUB**
+
+With _ResNet-18_ network
+
+| Methods  | 1-shot | 5-shot |
+|--------- |--------|--------|
+| MatchingNet (Vinyals et al., 2016)     | 73.49  | 84.45  |
+| MAML (Finn et al., 2017)     | 68.42 | 83.47 |
+| ProtoNet (Snell et al., 2017)     | 72.99 | 86.64 |
+| RelationNet (Sung et al., 2018)     | 68.58 | 84.05 |
+| Chen (Chen et al., 2019)    | 67.02 | 83.58  |
+| SimpleShot (Wang et al., 2019)    | 70.28  | 86.37  |
+| LaplacianShot (Ziko et al., 2020)     | 79.93 | 88.59 |
+| K-means      | 80.30 | 88.51|
+| K-modes    | 81.73 | 88.58|
+| SLK-Means     | 81.40 | **88.61**|
+| SLK-MS      | **81.88** | 88.55|

@@ -32,7 +32,6 @@ def kmeans_update(tmp):
     X = bound.SHARED_VARS['X_']
     X_tmp = X[tmp, :]
     c1 = X_tmp.mean(axis = 0)
-
     return c1
 
 def kmeans_update_soft(S_k):
@@ -260,7 +259,6 @@ def SLK(X, W, C, shot_size, lmd, method = 'BO', lap_bound = True, sigma = None):
         elif method == 'kmeans':
             # print ('Inside mean update')
             tmp_list = [np.where(l==k)[0] for k in range(K)]
-
             C_list = pool.map(kmeans_update, tmp_list)
             C = np.asarray(np.vstack(C_list))
             a_p = ecdist(X,C,squared=True)
@@ -276,8 +274,8 @@ def SLK(X, W, C, shot_size, lmd, method = 'BO', lap_bound = True, sigma = None):
         if lap_bound == True or lmd!=0.0:
             bound_iterations = 600
             Y = bound.normalize(-a_p)
-            # Y[:len(support_labels), :] = 0
-            # Y[np.arange(len(support_labels)), support_labels] = 1
+            Y[:len(support_labels), :] = 0
+            Y[np.arange(len(support_labels)), support_labels] = 1
             batch = True if X.shape[0]>100000 else False
             if method == 'BO':
                 l,C,Z= bound.bound_update(a_p, Y, X, W, lmd, bound_iterations, batch)
@@ -292,6 +290,11 @@ def SLK(X, W, C, shot_size, lmd, method = 'BO', lap_bound = True, sigma = None):
                 l = km_le(X,C,None,None)
                 Z = bound.get_S_discrete(l,N,K)
 
+        if (len(np.unique(l))!=K):
+            print('not having some labels, restore')
+            l =oldl.copy()
+            C =oldC.copy()
+            break;
 
         # Laplacian K-prototypes Energy
 
@@ -299,7 +302,7 @@ def SLK(X, W, C, shot_size, lmd, method = 'BO', lap_bound = True, sigma = None):
         # print('Laplacian K-prototype Energy is = {:.5f}'.format(currentE))
 
         # Convergence based on Laplacian K-prototypes Energy
-        if (i>1 and (abs(currentE-oldE)<= 1e-5*abs(oldE))):
+        if (i>1 and (abs(currentE-oldE)<= 1e-4*abs(oldE))):
             # print('......Job  done......')
             break
 

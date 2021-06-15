@@ -1,12 +1,12 @@
 # SLK-few-shot
 Clustering for Few-shot Learning
 
-This repository contains the code for **Clustering for few-shot learning** paper. If you use this code please cite the following paper:
-[**Clustering for few-shot learning**]()  
+This repository contains the code for **Transductive Few-Shot Learning: Clustering is All You Need?** paper. If you use this code please cite the following paper:
+[**Transductive Few-Shot Learning: Clustering is All You Need?**]()  
 Imtiaz Masud Ziko, Malik Boudiaf, Jose Dolz, Eric Granger and Ismail Ben Ayed  
 
 ## Introduction
-We Adapt clustering algorithm for few-shot learning task. The clustering part works on the initially learned feature extractor on base class data.
+We adapt clustering methods for few-shot learning taska. The clustering part works on the feature extractor initially trained over the base-class data.
 
 ## Usage
 ### 1. Dependencies

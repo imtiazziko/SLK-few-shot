@@ -1,12 +1,19 @@
 # SLK-few-shot
 Clustering for Transductive Few-shot Learning
 
-This repository contains the code for **Transductive Few-Shot Learning: Clustering is All You Need?** paper. If you use this code please cite the following paper:
+This repository contains the code for our paper entitled **Transductive Few-Shot Learning: Clustering is All You Need?** paper. 
+If you use this code, please cite:
 [**Transductive Few-Shot Learning: Clustering is All You Need?**]()  
-Imtiaz Masud Ziko, Malik Boudiaf, Jose Dolz, Eric Granger and Ismail Ben Ayed  
+Imtiaz Masud Ziko, Malik Boudiaf, Jose Dolz, Eric Granger and Ismail Ben Ayed, ArXiv 2021  
 
 ## Introduction
-We adapt clustering methods for few-shot learning taska. The clustering part works on the feature extractor initially trained over the base-class data.
+We adapt clustering methods for few-shot learning tasks. The clustering part works on the feature extractor initially trained over the base-class data.
+Using standard training on the base classes, without resorting to complex meta-learning and episodic-training strategies, our regularized-clustering 
+approaches outperform state-of-the-art few-shot methods by significant margins, across various models, settings and data sets. Surprisingly, we found 
+that even standard clustering procedures (e.g., K-means), which correspond to particular, non-regularized cases of our general model, already achieve competitive
+performances in comparison to the state-of-the-art in transductive few-shot learning. These surprising results point to the limitations of the current
+few-shot benchmarks, and question the viability of a large body of convoluted few-shot learning techniques in the recent literature. 
+
 
 ## Usage
 ### 1. Dependencies

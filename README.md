@@ -7,7 +7,7 @@ If you use this code, please cite:
 Imtiaz Masud Ziko, Malik Boudiaf, Jose Dolz, Eric Granger and Ismail Ben Ayed, ArXiv 2021  
 
 ## Introduction
-We adapt several clustering methods to transductive inference in few-shot learning tasks. The clustering part works on the feature extractor 
+We adapt several clustering methods to transductive inference in few-shot learning tasks. The clustering part works on a feature extractor 
 initially trained over the base-class data. Using standard training on the base classes, without resorting to complex meta-learning and episodic-training 
 strategies, our regularized-clustering approaches outperform state-of-the-art few-shot methods by significant margins, across various models, settings 
 and data sets. Surprisingly, we found that even standard clustering procedures (e.g., K-means), which correspond to particular, non-regularized cases of 

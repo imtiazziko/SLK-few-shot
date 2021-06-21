@@ -3,7 +3,7 @@ Clustering for Transductive Few-shot Learning
 
 This repository contains the code for our paper entitled **Transductive Few-Shot Learning: Clustering is All You Need?** paper. 
 If you use this code, please cite:
-[**Transductive Few-Shot Learning: Clustering is All You Need?**]()  
+[**Transductive Few-Shot Learning: Clustering is All You Need?**](https://arxiv.org/pdf/2106.09516.pdf)  
 Imtiaz Masud Ziko, Malik Boudiaf, Jose Dolz, Eric Granger and Ismail Ben Ayed, ArXiv 2021  
 
 ## Introduction
